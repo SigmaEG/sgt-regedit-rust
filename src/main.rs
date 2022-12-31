@@ -831,14 +831,13 @@ fn __subrun_cmd(__subcmd: &str, __subcrk: RegKey, __subchive: Hive, __subchive_d
 }
 
 fn main() {
-    let __subq: bool = false;
     let mut __subchive: Hive = Hive::CurrentUser;
     let mut __subchive_dir: String = String::new();
     let mut __subcrk = __subchive.open(__subchive_dir.as_str(), Security::Read).ok();
 
-    __subclr();
+    println!("<> SGT-REGEDIT-RUST :: PLEASE RUN [help] FOR A LIST OF COMMANDS <>\n");
 
-    while (!__subq) {
+    loop {
         let mut __subcmd: String = String::new();
         __subcrk = __subchive.open(__subchive_dir.as_str(), Security::Read).ok();
 
