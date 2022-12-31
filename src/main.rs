@@ -95,7 +95,7 @@ fn __subrun_cmd(__subcmd: &str, __subcrk: RegKey, __subchive: Hive, __subchive_d
                 __subarg = String::from(__subargs_lst[0]);
             }
 
-            match (__subarg.trim_end()) {
+            match (__subarg.to_lowercase().trim_end()) {
                 "hkc" | "hkey_classes_root" => {
                     __subn_chive = Hive::ClassesRoot;
                     __subn_chive_dir = String::new();
