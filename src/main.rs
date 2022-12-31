@@ -3,11 +3,8 @@
 #![allow(non_upper_case_globals)]
 #![allow(non_snake_case)]
 
-use std::borrow::Borrow;
 use std::io::{self, Write};
-use std::clone;
 use std::process;
-use std::collections::HashMap;
 use registry::*;
 use clearscreen::*;
 use utfx::U16CString;
@@ -40,6 +37,12 @@ const __subcmds: &'static [&'static str] = &[
     "< edit_val : [VAL_NAME :: VAL_TYPE :: VAL_DATA (EDITS EXISTING VALUE IN CURRENT DIRECTORY)] >"
 ];
 
+fn __subclr() {
+    clear();
+
+    println!("<> SGT-REGEDIT-RUST :: PLEASE RUN [help] FOR A LIST OF COMMANDS <>\n");
+}
+
 fn __subrun_cmd(__subcmd: &str, __subcrk: RegKey, __subchive: Hive, __subchive_dir: String) -> (RegKey, Hive, String) {
     let mut __subargs = __subcmd.split_whitespace();
     let __subarg_cmd = __subargs.next().unwrap().to_lowercase();
@@ -55,10 +58,10 @@ fn __subrun_cmd(__subcmd: &str, __subcrk: RegKey, __subchive: Hive, __subchive_d
 
     match (__subarg_cmd.trim_end()) {
         "clear" => {
-            clear();
+            __subclr();
         },
         "cls" => {
-            clear();
+            __subclr();
         },
         "getcwd" => {
             println!("< CURRENT REGISTRY DIRECTORY : {} >\n", __subn_crk.to_string());
@@ -832,6 +835,8 @@ fn main() {
     let mut __subchive: Hive = Hive::CurrentUser;
     let mut __subchive_dir: String = String::new();
     let mut __subcrk = __subchive.open(__subchive_dir.as_str(), Security::Read).ok();
+
+    __subclr();
 
     while (!__subq) {
         let mut __subcmd: String = String::new();
